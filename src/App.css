@@ -1,0 +1,27 @@
+header {
+  background: url('./images/bg-mobile-light.jpg') no-repeat center;
+  background-size: cover;
+  height: 35vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+@media screen and (min-width: 375px) {
+  header {
+    background: url('./images/bg-desktop-light.jpg') no-repeat center;
+    padding: 0 10%;
+  }
+}
+
+header img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+header h1 {
+  color: white;
+  letter-spacing: 10px;
+}
