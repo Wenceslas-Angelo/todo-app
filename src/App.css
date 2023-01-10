@@ -2,16 +2,25 @@ header {
   background: url('./images/bg-mobile-light.jpg') no-repeat center;
   background-size: cover;
   height: 35vh;
+  padding: 30px 8% 0 8%;
+}
+
+header .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
 }
 
 @media screen and (min-width: 375px) {
   header {
     background: url('./images/bg-desktop-light.jpg') no-repeat center;
-    padding: 0 10%;
+    padding: 30px 20% 0 20%;
+  }
+}
+
+@media screen and (min-width: 991px) {
+  header {
+    padding: 30px 30% 0 30%;
   }
 }
 
