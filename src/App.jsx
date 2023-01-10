@@ -28,6 +28,12 @@ function App() {
     setTodos(newTodos);
   };
 
+  //delete completed todos
+  const deleteCompleted = () => {
+    const newTodos = todos.filter((todo) => todo.completed === false);
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <header>
@@ -51,7 +57,21 @@ function App() {
             completedTodo={completedTodo}
           />
         ))}
+
+        <div className="filter">
+          <p>{todos.length} items left</p>
+          <div className="onglet">
+            <p>All</p>
+            <p>Active</p>
+            <p>Completed</p>
+          </div>
+          <p className="clear-completed" onClick={() => deleteCompleted()}>
+            Clear completed
+          </p>
+        </div>
       </div>
+
+      <p className="drag-drop-info">Drag and drop to reorder list</p>
     </div>
   );
 }

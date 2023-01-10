@@ -24,14 +24,16 @@
   margin: 0 10px 3px 0;
 }
 
-.todo img {
-  display: none;
-  cursor: pointer;
-  transition: all 0.3s linear;
-}
+@media screen and (min-width: 375px) {
+  .todo img {
+    display: none;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
 
-.todo:hover img {
-  display: block;
+  .todo:hover img {
+    display: block;
+  }
 }
 
 .todo.completed p {
