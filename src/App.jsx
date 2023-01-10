@@ -6,6 +6,7 @@ import moonIcon from './images/icon-moon.svg';
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [filterName, setFilterName] = useState('all');
 
   //Add todo
   const addTodo = (title) => {
@@ -34,6 +35,17 @@ function App() {
     setTodos(newTodos);
   };
 
+  //Filter todo
+  const filterTodo = () => {
+    if (filterName === 'active') {
+      return todos.filter((todo) => todo.completed === false);
+    } else if (filterName === 'completed') {
+      return todos.filter((todo) => todo.completed === true);
+    } else {
+      return todos;
+    }
+  };
+
   return (
     <div className="app">
       <header>
@@ -47,7 +59,7 @@ function App() {
       </header>
 
       <div className="todo-list">
-        {todos.map((todo) => (
+        {filterTodo().map((todo) => (
           <Todo
             key={todo.id}
             id={todo.id}
@@ -58,12 +70,34 @@ function App() {
           />
         ))}
 
+        {filterTodo().length === 0 && (
+          <span className="no-task">No task found</span>
+        )}
+
         <div className="filter">
-          <p>{todos.length} items left</p>
+          <p>
+            {filterTodo().length} {filterTodo().length < 2 ? 'item' : 'items'}{' '}
+            left
+          </p>
           <div className="onglet">
-            <p>All</p>
-            <p>Active</p>
-            <p>Completed</p>
+            <p
+              className={filterName === 'all' ? 'active' : 'inactive'}
+              onClick={() => setFilterName('all')}
+            >
+              All
+            </p>
+            <p
+              className={filterName === 'active' ? 'active' : 'inactive'}
+              onClick={() => setFilterName('active')}
+            >
+              Active
+            </p>
+            <p
+              className={filterName === 'completed' ? 'active' : 'inactive'}
+              onClick={() => setFilterName('completed')}
+            >
+              Completed
+            </p>
           </div>
           <p className="clear-completed" onClick={() => deleteCompleted()}>
             Clear completed

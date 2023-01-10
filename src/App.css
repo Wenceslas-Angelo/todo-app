@@ -74,6 +74,15 @@ header h1 {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
+@media screen and (min-width: 550px) {
+  .filter .onglet {
+    position: static;
+    width: 50%;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
 .clear-completed {
   cursor: pointer;
 }
@@ -82,8 +91,21 @@ header h1 {
   cursor: pointer;
 }
 
+.filter .onglet p.active {
+  color: var(--bright-blue);
+}
+
 .drag-drop-info {
   margin-top: 80px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.no-task {
+  color: red;
+  font-size: 25px;
+
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
 }
