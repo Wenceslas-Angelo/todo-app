@@ -3,6 +3,12 @@ import './App.css';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
 import moonIcon from './images/icon-moon.svg';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -46,6 +52,18 @@ function App() {
     }
   };
 
+  //Drag end todo
+  const handleDragEnd = (e) => {
+    const { active, over } = e;
+    if (active.id !== over.id) {
+      setTodos((todos) => {
+        const activeIndex = todos.findIndex((todo) => todo.id === active.id);
+        const overIndex = todos.findIndex((todo) => todo.id === over.id);
+        return arrayMove(todos, activeIndex, overIndex);
+      });
+    }
+  };
+
   return (
     <div className="app">
       <header>
@@ -59,16 +77,23 @@ function App() {
       </header>
 
       <div className="todo-list">
-        {filterTodo().map((todo) => (
-          <Todo
-            key={todo.id}
-            id={todo.id}
-            title={todo.title}
-            completed={todo.completed}
-            deleteTodo={deleteTodo}
-            completedTodo={completedTodo}
-          />
-        ))}
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={(e) => handleDragEnd(e)}
+        >
+          <SortableContext items={todos} strategy={verticalListSortingStrategy}>
+            {filterTodo().map((todo) => (
+              <Todo
+                key={todo.id}
+                id={todo.id}
+                title={todo.title}
+                completed={todo.completed}
+                deleteTodo={deleteTodo}
+                completedTodo={completedTodo}
+              />
+            ))}
+          </SortableContext>
+        </DndContext>
 
         {filterTodo().length === 0 && (
           <span className="no-task">No task found</span>
