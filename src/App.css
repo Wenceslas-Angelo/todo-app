@@ -2,7 +2,13 @@ header {
   background: url('./images/bg-mobile-light.jpg') no-repeat center;
   background-size: cover;
   height: 35vh;
-  padding: 30px 8% 0 8%;
+  padding: 30px 0;
+}
+
+.container,
+.todo-list {
+  width: 95%;
+  margin: auto;
 }
 
 header .title {
@@ -14,13 +20,18 @@ header .title {
 @media screen and (min-width: 375px) {
   header {
     background: url('./images/bg-desktop-light.jpg') no-repeat center;
-    padding: 30px 20% 0 20%;
+  }
+
+  .container,
+  .todo-list {
+    width: 80%;
   }
 }
 
 @media screen and (min-width: 991px) {
-  header {
-    padding: 30px 30% 0 30%;
+  .container,
+  .todo-list {
+    width: 60%;
   }
 }
 
@@ -33,4 +44,13 @@ header img {
 header h1 {
   color: white;
   letter-spacing: 10px;
+}
+
+.todo-list {
+  margin: auto;
+  background-color: var(--very-light-gray);
+  margin-top: -30px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  padding: 15px 0;
+  border-radius: 5px;
 }

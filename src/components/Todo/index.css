@@ -1,0 +1,47 @@
+.todo {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+  border-bottom: 1px solid var(--very-dark-grayish-blue);
+}
+
+.todo-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-info p {
+  color: var(--very-dark-grayish-blue);
+}
+
+.check-todo {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--dark-grayish-blue);
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 10px 3px 0;
+}
+
+.todo img {
+  display: none;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.todo:hover img {
+  display: block;
+}
+
+.todo.completed p {
+  color: var(--light-grayish-blue);
+  text-decoration: line-through;
+}
+
+.todo.completed .check-todo {
+  background: url('../../images/icon-check.svg'), var(--check-background);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid var(--check-background);
+}
