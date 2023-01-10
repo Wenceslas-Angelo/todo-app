@@ -20,6 +20,14 @@ function App() {
     setTodos(newTodos);
   };
 
+  //completed todo
+  const completedTodo = (id) => {
+    const newTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <header>
@@ -40,6 +48,7 @@ function App() {
             title={todo.title}
             completed={todo.completed}
             deleteTodo={deleteTodo}
+            completedTodo={completedTodo}
           />
         ))}
       </div>
