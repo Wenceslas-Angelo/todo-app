@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import './App.css';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
 import moonIcon from './images/icon-moon.svg';
+import sunIcon from './images/icon-sun.svg';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -10,9 +11,12 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
+export const ThemeContext = createContext(null);
+
 function App() {
   const [todos, setTodos] = useState([]);
   const [filterName, setFilterName] = useState('all');
+  const [theme, setTheme] = useState('dark');
 
   //Add todo
   const addTodo = (title) => {
@@ -64,74 +68,88 @@ function App() {
     }
   };
 
+  //Switch theme
+  const toggleTheme = () => {
+    setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
+  };
+
   return (
-    <div className="app">
-      <header>
-        <div className="container">
-          <div className="title">
-            <h1>TODO</h1>
-            <img src={moonIcon} alt="moon-icon" />
-          </div>
-          <TodoForm addTodo={addTodo} />
-        </div>
-      </header>
-
-      <div className="todo-list">
-        <DndContext
-          collisionDetection={closestCenter}
-          onDragEnd={(e) => handleDragEnd(e)}
-        >
-          <SortableContext items={todos} strategy={verticalListSortingStrategy}>
-            {filterTodo().map((todo) => (
-              <Todo
-                key={todo.id}
-                id={todo.id}
-                title={todo.title}
-                completed={todo.completed}
-                deleteTodo={deleteTodo}
-                completedTodo={completedTodo}
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className="app" id={theme}>
+        <header className={theme}>
+          <div className="container">
+            <div className="title">
+              <h1>TODO</h1>
+              <img
+                src={theme === 'light' ? moonIcon : sunIcon}
+                alt="theme-icon"
+                onClick={() => toggleTheme()}
               />
-            ))}
-          </SortableContext>
-        </DndContext>
+            </div>
+            <TodoForm addTodo={addTodo} />
+          </div>
+        </header>
 
-        {filterTodo().length === 0 && (
-          <span className="no-task">No task found</span>
-        )}
+        <div className="todo-list">
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={(e) => handleDragEnd(e)}
+          >
+            <SortableContext
+              items={todos}
+              strategy={verticalListSortingStrategy}
+            >
+              {filterTodo().map((todo) => (
+                <Todo
+                  key={todo.id}
+                  id={todo.id}
+                  title={todo.title}
+                  completed={todo.completed}
+                  deleteTodo={deleteTodo}
+                  completedTodo={completedTodo}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
 
-        <div className="filter">
-          <p>
-            {filterTodo().length} {filterTodo().length < 2 ? 'item' : 'items'}{' '}
-            left
-          </p>
-          <div className="onglet">
-            <p
-              className={filterName === 'all' ? 'active' : 'inactive'}
-              onClick={() => setFilterName('all')}
-            >
-              All
+          {filterTodo().length === 0 && (
+            <span className="no-task">No task found</span>
+          )}
+
+          <div className="filter">
+            <p>
+              {filterTodo().length} {filterTodo().length < 2 ? 'item' : 'items'}{' '}
+              left
             </p>
-            <p
-              className={filterName === 'active' ? 'active' : 'inactive'}
-              onClick={() => setFilterName('active')}
-            >
-              Active
-            </p>
-            <p
-              className={filterName === 'completed' ? 'active' : 'inactive'}
-              onClick={() => setFilterName('completed')}
-            >
-              Completed
+            <div className="onglet">
+              <p
+                className={filterName === 'all' ? 'active' : 'inactive'}
+                onClick={() => setFilterName('all')}
+              >
+                All
+              </p>
+              <p
+                className={filterName === 'active' ? 'active' : 'inactive'}
+                onClick={() => setFilterName('active')}
+              >
+                Active
+              </p>
+              <p
+                className={filterName === 'completed' ? 'active' : 'inactive'}
+                onClick={() => setFilterName('completed')}
+              >
+                Completed
+              </p>
+            </div>
+            <p className="clear-completed" onClick={() => deleteCompleted()}>
+              Clear completed
             </p>
           </div>
-          <p className="clear-completed" onClick={() => deleteCompleted()}>
-            Clear completed
-          </p>
         </div>
-      </div>
 
-      <p className="drag-drop-info">Drag and drop to reorder list</p>
-    </div>
+        <p className="drag-drop-info">Drag and drop to reorder list</p>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 

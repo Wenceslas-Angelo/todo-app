@@ -2,8 +2,16 @@
   display: flex;
   justify-content: space-between;
   padding: 20px 10px;
-  border-bottom: 1px solid var(--very-dark-grayish-blue);
+
   cursor: move;
+}
+
+#light .todo {
+  border-bottom: 1px solid var(--very-dark-grayish-blue);
+}
+
+#dark .todo {
+  border-bottom: 1px solid var(--light-grayish-blue-dark-2);
 }
 
 .todo-info {
@@ -12,8 +20,11 @@
   justify-content: center;
 }
 
-.todo-info p {
+#light .todo-info p {
   color: var(--very-dark-grayish-blue);
+}
+#dark .todo-info p {
+  color: var(--light-grayish-blue-dark-2);
 }
 
 .check-todo {
@@ -40,6 +51,10 @@
 .todo.completed p {
   color: var(--light-grayish-blue);
   text-decoration: line-through;
+}
+
+#dark .todo.completed p {
+  color: var(--very-dark-grayish-blue-dark-1);
 }
 
 .todo.completed .check-todo {

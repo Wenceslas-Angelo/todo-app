@@ -1,9 +1,20 @@
 form {
-  background-color: var(--very-light-gray);
-  padding: 10px;
+  padding: 15px 10px;
   border-radius: 5px;
   margin: 20px 0;
   position: relative;
+}
+
+#light form,
+#light form input {
+  background-color: var(--very-light-gray);
+  color: var(--very-dark-blue);
+}
+
+#dark form,
+#dark form input {
+  background-color: var(--very-dark-desaturated-blue);
+  color: var(--very-light-gray);
 }
 
 form input {

@@ -1,8 +1,29 @@
+.app {
+  min-height: 100vh;
+  height: 100%;
+}
+
+#light {
+  background-color: var(--very-light-gray);
+}
+
+#dark {
+  background-color: var(--very-dark-blue);
+}
+
 header {
-  background: url('./images/bg-mobile-light.jpg') no-repeat center;
-  background-size: cover;
   height: 35vh;
   padding: 30px 0;
+}
+
+header.light {
+  background: url('./images/bg-mobile-light.jpg') no-repeat center;
+  background-size: cover;
+}
+
+header.dark {
+  background: url('./images/bg-mobile-dark.jpg') no-repeat center;
+  background-size: cover;
 }
 
 .container,
@@ -18,8 +39,12 @@ header .title {
 }
 
 @media screen and (min-width: 375px) {
-  header {
+  header.light {
     background: url('./images/bg-desktop-light.jpg') no-repeat center;
+  }
+
+  header.dark {
+    background: url('./images/bg-desktop-dark.jpg') no-repeat center;
   }
 
   .container,
@@ -49,17 +74,25 @@ header h1 {
 .todo-list {
   margin: auto;
   background-color: var(--very-light-gray);
-  margin-top: -30px;
+  margin-top: -45px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   padding: 15px 0;
   border-radius: 5px;
   position: relative;
 }
 
+#dark .todo-list {
+  background-color: var(--very-dark-desaturated-blue);
+}
+
 .filter {
   display: flex;
   justify-content: space-between;
   padding: 20px 10px;
+}
+
+#dark .filter {
+  color: var(--light-grayish-blue-dark-1);
 }
 
 .filter .onglet {
@@ -72,6 +105,10 @@ header h1 {
   text-align: center;
   width: 95%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+#dark .filter .onglet {
+  background-color: var(--very-dark-desaturated-blue);
 }
 
 @media screen and (min-width: 550px) {
@@ -97,14 +134,17 @@ header h1 {
 
 .drag-drop-info {
   margin-top: 80px;
-  margin-bottom: 20px;
+  padding-bottom: 40px;
   text-align: center;
+}
+
+#dark .drag-drop-info {
+  color: var(--light-grayish-blue-dark-1);
 }
 
 .no-task {
   color: red;
   font-size: 25px;
-
   display: flex;
   justify-content: center;
   padding: 20px 0;
