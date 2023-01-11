@@ -1,8 +1,7 @@
 .todo {
   display: flex;
   justify-content: space-between;
-  padding: 20px 10px;
-
+  padding: 30px 10px;
   cursor: move;
 }
 
@@ -62,4 +61,16 @@
   background-repeat: no-repeat;
   background-position: center;
   border: 2px solid var(--check-background);
+}
+
+.todo .action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.todo .action img.edit-icon {
+  margin-right: 50px;
+  color: white;
 }
