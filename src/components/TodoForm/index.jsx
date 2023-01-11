@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
 
-function TodoForm({ addTodo }) {
-  const [input, setInput] = useState('');
+function TodoForm({ addTodo, input, setInput }) {
   const [error, setError] = useState(false);
+
+  // if (editTodo) {
+  //   setInput(editTodo);
+  // } else {
+  //   setInput('');
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,6 +37,8 @@ function TodoForm({ addTodo }) {
 
 TodoForm.propTypes = {
   addTodo: PropTypes.func,
+  input: PropTypes.string,
+  setInput: PropTypes.func,
 };
 
 export default TodoForm;

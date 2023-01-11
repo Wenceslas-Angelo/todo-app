@@ -17,6 +17,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [filterName, setFilterName] = useState('all');
   const [theme, setTheme] = useState('dark');
+  const [input, setInput] = useState('');
 
   //Add todo
   const addTodo = (title) => {
@@ -73,6 +74,12 @@ function App() {
     setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
   };
 
+  const enterEditMode = (id) => {
+    const todo = todos.find((todo) => todo.id === id);
+    setInput(todo.title);
+    deleteTodo(id);
+  };
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" id={theme}>
@@ -86,7 +93,7 @@ function App() {
                 onClick={() => toggleTheme()}
               />
             </div>
-            <TodoForm addTodo={addTodo} />
+            <TodoForm addTodo={addTodo} input={input} setInput={setInput} />
           </div>
         </header>
 
@@ -107,6 +114,7 @@ function App() {
                   completed={todo.completed}
                   deleteTodo={deleteTodo}
                   completedTodo={completedTodo}
+                  enterEditMode={enterEditMode}
                 />
               ))}
             </SortableContext>

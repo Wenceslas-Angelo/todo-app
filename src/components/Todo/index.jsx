@@ -37,7 +37,7 @@ function Todo({
           src={editIcon}
           alt="edit-icon"
           className="edit-icon"
-          onClick={() => enterEditMode()}
+          onClick={() => enterEditMode(id)}
         />
         <img src={crossIcon} alt="cross-icon" onClick={() => deleteTodo(id)} />
       </div>
